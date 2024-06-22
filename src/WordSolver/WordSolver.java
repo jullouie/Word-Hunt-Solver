@@ -1,3 +1,4 @@
+package src.WordSolver;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -5,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WordSolver {
-        // 2-D array representation of the board where char[0][0] represents top left corner
+    // 2-D array representation of the board where char[0][0] represents top left corner
     private char[][] board;
     private Trie dictionary;
     private Set<String> wordsFound;
@@ -96,8 +97,13 @@ public class WordSolver {
             {'D', 'S', 'J', 'I'}
         };
         WordSolver solver = new WordSolver(board);
-        // add in a filename
-        solver.createDictionary("");
+        //add in a filename
+        solver.createDictionary("src/WordSolver/wordList.txt");
+        Set<String> words = solver.findWords(7);
+        
+        for (String word : words) {
+            System.out.println(word);
+        }
 
     }
 }
