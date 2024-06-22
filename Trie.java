@@ -59,7 +59,7 @@ public class Trie {
      * @param word
      * @return if string is a valid word in the trie
      */
-    public boolean isWord(String word){
+    public boolean contains(String word){
         TrieNode node = searchNode(word);
         return node != null && node.isEndofWord;
     }
