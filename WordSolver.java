@@ -1,15 +1,14 @@
-/**
- * Class to solve Word Hunt
- * 
- * @author Julianne
-*/
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Solver{
-
-    // 2-D array representation of the board where char[0][0] represents top left corner
+public class WordSolver {
+        // 2-D array representation of the board where char[0][0] represents top left corner
     private char[][] board;
     private Trie dictionary;
-    private HashSet<String> wordsFound;
+    private Set<String> wordsFound;
     private boolean[][] visited;
 
     // to find the perimeter of 8 letters around (x,y)
@@ -17,17 +16,18 @@ public class Solver{
     private static final int[] ypos = {-1, 0, 1, -1, 1, -1, 0, 1};
 
     // constructor
-    public Solver(char[][] board){
+    public WordSolver(char[][] board){
         this.board = board;
         this.dictionary = new Trie();
-        this.wordsFound = new HashSet<>;
-        this.visited = new boolean[4][4]
+        this.wordsFound = new HashSet<>();
+        this.visited = new boolean[4][4];
     }
 
     /**
      * Creates a trie of all the valid words for the Word Hunt
+     * @throws IOException 
      */
-    public void createDictionary(String filename){
+    public void createDictionary(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String word;
         while ((word = reader.readLine()) != null){
@@ -42,9 +42,9 @@ public class Solver{
      * @param n minimum length of words wanted
      * @return hash set of the foundwords
      */
-    public HashSet<String> findWords(n){
-        for (int i; i < 4; i++){
-            for (int j; j < 4; j++){
+    public Set<String> findWords(int n){
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
                 dfs(i, j, "", n);
             }
         }
@@ -58,7 +58,7 @@ public class Solver{
      * @param currentWord word built through recursion
      * @param n min number of letters in wordsFound
      */
-    private void dfs(int x, int y, String currentWord, n) {
+    private void dfs(int x, int y, String currentWord, int n) {
 
         // if coordinates out of bound or already visited
         if (x < 0 || x > 3 || y < 0 || y > 3 || visited[x][y]){
@@ -73,7 +73,7 @@ public class Solver{
         }
 
         // search for current word in dictionary
-        if (currentWord.length >= n && dictionary.contains(currentWord)){
+        if (currentWord.length() >= n && dictionary.contains(currentWord)){
             wordsFound.add(currentWord);
         }
 
@@ -88,34 +88,16 @@ public class Solver{
         visited[x][y] = false;
     }
 
-    public static void main(String[] args){
-        Solver solver = new Solver({'A', 'D', 'E', 'R'}{'B', 'R', 'I', 'P'}{'C', 'E', 'D', 'A'}{'D', 'S', 'J', 'I'});
+    public static void main(String[] args) throws IOException{
+        char[][] board = {
+            {'A', 'D', 'E', 'R'},
+            {'B', 'R', 'I', 'P'},
+            {'C', 'E', 'D', 'A'},
+            {'D', 'S', 'J', 'I'}
+        };
+        WordSolver solver = new WordSolver(board);
         // add in a filename
         solver.createDictionary("");
 
     }
-    
 }
-    /*
-     *     
-     * input: a string of 16 characters
-     * output: all the words (5 letters+) you can make
-     * 
-     * methods:
-     * read in a file of words
-     * make the string of 16 characters data that the program can use for DFS => a graph
-     * conduct DFS and match to all the words
-     * print the answers
-     * 
-     * add complexity:
-     * make a website (github pages)
-     * output the words in a different order? a way to maximize points for the user? group them by letter?
-     * 
-     * Plan:
-     * make a board representation to be char[] or String
-     * make a getNeighbors function
-     * implement DFS - initially just check if the word is in the hashset (fast lookup)
-     * 
-     * implement w a trie
-     * serialize the trie
-     */
