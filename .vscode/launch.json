@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "WordSolver",
+            "request": "launch",
+            "mainClass": "WordSolver",
+            "projectName": "Word-Hunt-Solver_b1c6f380"
+        },
+        {
+            "type": "java",
             "name": "Launch WordSolver",
             "request": "launch",
             "mainClass": "src.WordSolver.WordSolver",

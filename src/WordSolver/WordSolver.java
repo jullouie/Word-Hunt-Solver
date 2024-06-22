@@ -1,4 +1,4 @@
-package src.WordSolver;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -104,6 +104,5 @@ public class WordSolver {
         for (String word : words) {
             System.out.println(word);
         }
-
     }
 }
