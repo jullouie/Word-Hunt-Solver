@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class WordSolver {
     // 2-D array representation of the board where char[0][0] represents top left corner
-    private char[][] board;
+    private char[][] board = new char[4][4];
     private Trie dictionary;
     private Set<String> wordsFound;
     private boolean[][] visited;
@@ -17,8 +17,10 @@ public class WordSolver {
     private static final int[] ypos = {-1, 0, 1, -1, 1, -1, 0, 1};
 
     // constructor
-    public WordSolver(char[][] board){
-        this.board = board;
+    public WordSolver(String str){
+        for (int i = 0; i < 16; i+=4){
+            this.board[i/4] = str.substring(i, i+4).toCharArray();
+        }
         this.dictionary = new Trie();
         this.wordsFound = new HashSet<>();
         this.visited = new boolean[4][4];
@@ -91,13 +93,7 @@ public class WordSolver {
     }
 
     public static void main(String[] args) throws IOException{
-        char[][] board = {
-            {'t', 'i', 'b','d'},
-            {'e', 'a', 'o', 'h'},
-            {'m', 's', 'i', 'e'},
-            {'f', 'a', 'o', 'r'}
-        };
-        WordSolver solver = new WordSolver(board);
+        WordSolver solver = new WordSolver("cttrsoebfqscaodw");
         //add in a filename
         solver.createDictionary("src/WordSolver/words.txt");
         Set<String> words = solver.findWords(5);
