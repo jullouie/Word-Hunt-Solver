@@ -35,6 +35,7 @@ public class WordSolver {
             dictionary.insert(word.toLowerCase());
         }
         reader.close();
+        // System.out.println("dictionary done");
     }
 
     /**
@@ -66,7 +67,7 @@ public class WordSolver {
             return;
         }
 
-        currentWord += board[x][y];
+        currentWord += Character.toLowerCase(board[x][y]);
 
         // if the current word is not a prefix, there are no words
         if (!dictionary.isPrefix(currentWord)){
@@ -91,15 +92,15 @@ public class WordSolver {
 
     public static void main(String[] args) throws IOException{
         char[][] board = {
-            {'A', 'D', 'E', 'R'},
-            {'B', 'R', 'I', 'P'},
-            {'C', 'E', 'D', 'A'},
-            {'D', 'S', 'J', 'I'}
+            {'t', 'i', 'b','d'},
+            {'e', 'a', 'o', 'h'},
+            {'m', 's', 'i', 'e'},
+            {'f', 'a', 'o', 'r'}
         };
         WordSolver solver = new WordSolver(board);
         //add in a filename
-        solver.createDictionary("src/WordSolver/wordList.txt");
-        Set<String> words = solver.findWords(7);
+        solver.createDictionary("src/WordSolver/words.txt");
+        Set<String> words = solver.findWords(5);
         
         for (String word : words) {
             System.out.println(word);

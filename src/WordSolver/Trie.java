@@ -73,6 +73,12 @@ public class Trie {
     private TrieNode searchNode(String str){
         TrieNode current = root;
         for (char c : str.toCharArray()){
+
+            // // TODO: delete
+            // for (Character lala : current.children.keySet()) {
+            //     System.out.println(lala);
+            // }
+
             if (!current.children.containsKey(c)){
                 return null;
             }
