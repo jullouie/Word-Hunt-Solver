@@ -153,8 +153,6 @@ public class WordSolver {
             }
         }
 
-        // store foundWords in a stack with own comparator where compares length of word
-        // based on prefixes - give all of them for each three letter prefix
-        // make a hashmap of {prefix, list of Strings} then put in a stack ordered based on longest list of strings
+        // make an anagram solver, wordbites solver
     }
 }
