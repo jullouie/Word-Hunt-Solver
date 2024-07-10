@@ -2,6 +2,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.Set;
 
-public class WordSolver {
+public class AnagramSolver {
     // 2-D array representation of the board where char[0][0] represents top left corner
     private char[][] board = new char[4][4];
     private Trie dictionary;
@@ -17,7 +18,6 @@ public class WordSolver {
     private HashMap<String, PriorityQueue<String>> prefixes;
     private HashMap<String, HashSet<String>> prefixWordSets;
     private PriorityQueue<String> orderedWords;
-    private boolean[][] visited;
     private Comparator<String> greatestToL;
     private Comparator<String> leastToG;
     private String prefix = "";
@@ -26,16 +26,18 @@ public class WordSolver {
     private static final int[] xpos = {-1, -1, -1, 0, 0, 1, 1, 1};
     private static final int[] ypos = {-1, 0, 1, -1, 1, -1, 0, 1};
 
+    private ArrayList<String> letters;
+
     // constructor
-    public WordSolver(String str){
-        for (int i = 0; i < 16; i+=4){
-            this.board[i/4] = str.substring(i, i+4).toCharArray();
+    public AnagramSolver(String str){
+
+        // makes an arraylist of all the letters to use for the anagrams
+        for (int i = 0; i < str.length(); i++){
+            this.letters.add(String.valueOf(str.charAt(i)));
         }
         this.dictionary = new Trie();
         this.wordsFound = new HashSet<>();
-        this.visited = new boolean[4][4];
         this.greatestToL = (a,b) -> Integer.compare(b.length(), a.length());
-        this.leastToG = (a,b) -> Integer.compare(a.length(), b.length());
         this.orderedWords = new PriorityQueue<String>(greatestToL);
         this.prefixes = new HashMap<String, PriorityQueue<String>>();
         this.prefixWordSets = new HashMap<String, HashSet<String>>();
@@ -152,6 +154,8 @@ public class WordSolver {
             }
         }
 
-        // make an anagram solver, wordbites solver
+        // make an anagram solver: only add to hashset wordbank if the word is <= 6 and >=3
+        // then make an isAnagram solver to compare letter counts of all letters
+        // then make a method findAnagrams that does isAnagram on all the words in the dictionary
     }
 }
